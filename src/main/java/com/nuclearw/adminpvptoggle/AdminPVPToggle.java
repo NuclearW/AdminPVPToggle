@@ -25,6 +25,10 @@ public class AdminPVPToggle extends JavaPlugin implements Listener {
 		// Database
 		initDatabase();
 
+		// CleanupTask
+		RemoveFromDisallowTask task = new RemoveFromDisallowTask(this);
+		getServer().getScheduler().scheduleAsyncRepeatingTask(this, task, 0L, 12000L);
+
 		// Hi ma
 		getLogger().info("Finished Loading " + getDescription().getFullName());
 	}
