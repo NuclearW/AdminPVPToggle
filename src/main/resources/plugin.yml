@@ -1,0 +1,6 @@
+name: AdminPVPToggle
+main: com.nuclearw.adminpvptoggle.AdminPVPToggle
+version: ${project.version}
+author: NuclearW
+description: AdminPVPToggle allows admins to force pvp on or off for a player and allow for automatic expiration to re-enable pvp
+database: true

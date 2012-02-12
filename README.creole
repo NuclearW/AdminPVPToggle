@@ -1,0 +1,7 @@
+== AdminPVPToggle
+
+AdminPVPToggle allows admins to force pvp on or off for a player and allow for automatic expiration to re-enable pvp
+
+=== Compiling
+
+Maven 3 is required to compile AdminPVPToggle
