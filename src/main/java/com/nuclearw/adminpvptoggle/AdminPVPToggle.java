@@ -166,7 +166,7 @@ public class AdminPVPToggle extends JavaPlugin implements Listener {
 		}
 	}
 
-	protected void removePlayer(String playerName) {
+	private void removePlayer(String playerName) {
 		List<PVPPlayer> found = getDatabase().find(PVPPlayer.class).where().ieq("name", playerName).findList();
 		if(found != null) getDatabase().delete(found);
 	}
