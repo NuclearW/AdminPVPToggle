@@ -1,5 +1,6 @@
 package com.nuclearw.adminpvptoggle;
 
+import java.util.Iterator;
 import java.util.List;
 
 import com.avaje.ebean.Expr;
@@ -17,6 +18,14 @@ public class RemoveFromDisallowTask implements Runnable {
 			.add(Expr.gt("timeExpire", 0L))
 			.add(Expr.le("timeExpire", System.currentTimeMillis()))
 			.findList();
-		if(found != null) plugin.getDatabase().delete(found);
+		if(found != null) {
+			Iterator<PVPPlayer> i = found.iterator();
+			while(i.hasNext()) {
+				PVPPlayer next = i.next();
+
+				plugin.getLogger().info("PVP disable on " + next.getName() + " expired.");
+			}
+			plugin.getDatabase().delete(found);
+		}
 	}
 }

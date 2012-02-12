@@ -61,6 +61,7 @@ public class AdminPVPToggle extends JavaPlugin implements Listener {
 			removePlayer(targetName);
 
 			sender.sendMessage("Removed PVP disable on "+targetName);
+			getLogger().info(sender.getName() + " removed PVP disable on " + targetName);
 
 			return true;
 		}
@@ -139,6 +140,7 @@ public class AdminPVPToggle extends JavaPlugin implements Listener {
 				}
 			}
 			sender.sendMessage("Disabled PVP on " + targetName + " until " + until);
+			getLogger().info(sender.getName() + "set PVP disable on " + targetName + " until " + until);
 
 			return true;
 		}
