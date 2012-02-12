@@ -2,6 +2,7 @@ package com.nuclearw.adminpvptoggle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.PersistenceException;
 
@@ -34,7 +35,44 @@ public class AdminPVPToggle extends JavaPlugin implements Listener {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		// TODO: Commands for adding to and fro
+		if(label.equalsIgnoreCase("enablepvp")) {
+			// Permissions!
+			if(sender instanceof Player) {
+				if(!sender.hasPermission("adminpvptoggle.enablepvp")) {
+					sender.sendMessage("You do not have permission to perform this command.");
+				}
+			}
+
+			// Args length check
+			if(args.length != 1) return false;
+
+			String targetName = args[0];
+
+			// Check to get a player name from a partial match
+			Player target = getServer().getPlayer(args[0]);
+			if(target != null) targetName = target.getName();
+
+			removePlayer(targetName);
+
+			return false;
+		}
+
+		if(label.equalsIgnoreCase("disablepvp")) {
+			// Permissions!
+			if(sender instanceof Player) {
+				if(!sender.hasPermission("adminpvptoggle.disablepvp")) {
+					sender.sendMessage("You do not have permission to perform this command.");
+				}
+			}
+
+			// Args length check
+			if(args.length < 1) return false;
+
+			// TODO: Actually do command
+
+			return false;
+		}
+
 		return true;
 	}
 
@@ -60,6 +98,11 @@ public class AdminPVPToggle extends JavaPlugin implements Listener {
 			event.setCancelled(true);
 			return;
 		}
+	}
+
+	private void removePlayer(String playerName) {
+		Set<PVPPlayer> found = getDatabase().find(PVPPlayer.class).where().ieq("name", playerName).findSet();
+		getDatabase().delete(found);
 	}
 
 	private boolean canPVP(String playerName) {
