@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
-
 import javax.persistence.PersistenceException;
 
 import org.bukkit.command.Command;
@@ -168,17 +166,17 @@ public class AdminPVPToggle extends JavaPlugin implements Listener {
 		}
 	}
 
+	protected void removePlayer(String playerName) {
+		List<PVPPlayer> found = getDatabase().find(PVPPlayer.class).where().ieq("name", playerName).findList();
+		if(found != null) getDatabase().delete(found);
+	}
+
 	private void addPlayer(String playerName, long timeExpire) {
 		PVPPlayer add = new PVPPlayer();
 		add.setName(playerName);
 		add.setTimeExpire(timeExpire);
 
 		getDatabase().save(add);
-	}
-
-	private void removePlayer(String playerName) {
-		Set<PVPPlayer> found = getDatabase().find(PVPPlayer.class).where().ieq("name", playerName).findSet();
-		getDatabase().delete(found);
 	}
 
 	private boolean canPVP(String playerName) {
