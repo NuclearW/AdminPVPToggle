@@ -27,7 +27,7 @@ public class AdminPVPToggle extends JavaPlugin implements Listener {
 
 		// CleanupTask
 		RemoveFromDisallowTask task = new RemoveFromDisallowTask(this);
-		getServer().getScheduler().scheduleAsyncRepeatingTask(this, task, 0L, 12000L);
+		getServer().getScheduler().scheduleAsyncRepeatingTask(this, task, 1L, 12000L);
 
 		// Hi ma
 		getLogger().info("Finished Loading " + getDescription().getFullName());
@@ -140,7 +140,7 @@ public class AdminPVPToggle extends JavaPlugin implements Listener {
 				}
 			}
 			sender.sendMessage("Disabled PVP on " + targetName + " until " + until);
-			getLogger().info(sender.getName() + "set PVP disable on " + targetName + " until " + until);
+			getLogger().info(sender.getName() + " set PVP disable on " + targetName + " until " + until);
 
 			return true;
 		}

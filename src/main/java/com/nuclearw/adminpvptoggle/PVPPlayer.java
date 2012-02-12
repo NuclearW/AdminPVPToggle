@@ -31,7 +31,7 @@ public class PVPPlayer {
 		return name;
 	}
 
-	public long getTimeApplied() {
+	public long getTimeExpire() {
 		return timeExpire;
 	}
 
