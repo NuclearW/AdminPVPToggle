@@ -119,6 +119,12 @@ public class AdminPVPToggle extends JavaPlugin implements Listener {
 				count -= 2;
 			}
 
+			if(time == 0) {
+				if(!sender.hasPermission("adminpvptoggle.disablepvp.permanent")) {
+					sender.sendMessage("You do not have permission to perform this command.");
+				}
+			}
+
 			// Do it
 			addPlayer(targetName, time);
 
