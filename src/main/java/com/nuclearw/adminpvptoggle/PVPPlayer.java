@@ -20,12 +20,8 @@ public class PVPPlayer {
 	private String name;
 	
 	@NotNull
-	@Column(name="time_applied")
-	private long timeApplied;
-
-	@NotNull
-	@Column(name="time_to_live")
-	private long timeToLive;
+	@Column(name="time_expire")
+	private long timeExpire;
 
 	public int getId() {
 		return id;
@@ -36,11 +32,7 @@ public class PVPPlayer {
 	}
 
 	public long getTimeApplied() {
-		return timeApplied;
-	}
-
-	public long getTimeToLive() {
-		return timeToLive;
+		return timeExpire;
 	}
 
 	public void setId(int id) {
@@ -51,11 +43,7 @@ public class PVPPlayer {
 		this.name = name;
 	}
 
-	public void setTimeApplied(long timeApplied) {
-		this.timeApplied = timeApplied;
-	}
-
-	public void setTimeToLive(long timeToLive) {
-		this.timeToLive = timeToLive;
+	public void setTimeExpire(long timeExpire) {
+		this.timeExpire = timeExpire;
 	}
 }
