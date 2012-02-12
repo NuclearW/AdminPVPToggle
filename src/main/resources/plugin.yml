@@ -4,3 +4,28 @@ version: ${project.version}
 author: NuclearW
 description: AdminPVPToggle allows admins to force pvp on or off for a player and allow for automatic expiration to re-enable pvp
 database: true
+commands:
+    disablepvp:
+        description: Set a pvp disable on a player
+        usage: |
+            /<command> <user> (<#> <m|d|w> ...)
+    enablepvp:
+        description: Remove a pvp disable on a player
+        usage: |
+            /<command> <user>
+permissions:
+    adminpvptoggle.*:
+        description: Gives access to all AdminPVPToggle commands
+        children:
+            adminpvptoggle.disablepvp: true
+            adminpvptoggle.disablepvp.permanent: true
+            adminpvptoggle.enablepvp: true
+    adminpvptoggle.disablepvp:
+        description: Allows you to set a timed pvp disable on a player
+        default: op
+    adminpvptoggle.disablepvp.permanent:
+        description: Allows you to set a permanent pvp disable on a player
+        default: op
+    adminpvptoggle.enablepvp:
+        description: Allows you to remove a pvp disable on a player
+        default: op
