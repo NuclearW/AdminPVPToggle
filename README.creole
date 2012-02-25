@@ -2,6 +2,22 @@
 
 AdminPVPToggle allows admins to force pvp on or off for a player and allow for automatic expiration to re-enable pvp
 
+=== Commands
+
+* /disablepvp <user> (<#> <m|d|w> ...)
+* /enablepvp <user>
+
+=== Permissions
+
+* adminpvptoggle.disablepvp
+** //Allows you to set a timed pvp disable on a player//
+* adminpvptoggle.disablepvp.permanent
+** //Allows you to set a permanent pvp disable on a player//
+* adminpvptoggle.enablepvp
+** //Allows you to remove a pvp disable on a player//
+
+All permissions default to **op**
+
 === Compiling
 
 Maven 3 is required to compile AdminPVPToggle
