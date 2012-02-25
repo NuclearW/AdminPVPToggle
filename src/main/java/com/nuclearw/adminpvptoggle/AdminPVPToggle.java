@@ -9,7 +9,9 @@ import javax.persistence.PersistenceException;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -161,15 +163,24 @@ public class AdminPVPToggle extends JavaPlugin implements Listener {
         return list;
     }
 
-	@EventHandler
+	@EventHandler(ignoreCancelled = true)
 	public void onEntityDamage(EntityDamageEvent event) {
-		if(event.isCancelled()) return;
 		if(!(event instanceof EntityDamageByEntityEvent)) return;
 		EntityDamageByEntityEvent dEvent = (EntityDamageByEntityEvent) event;
-		if(!(dEvent.getDamager() instanceof Player)) return;
+		if(!(dEvent.getDamager() instanceof Player || dEvent.getDamager() instanceof Projectile)) return;
 		if(!(dEvent.getEntity() instanceof Player)) return;
 
-		Player attacker = (Player) dEvent.getDamager();
+		Player attacker;
+		if(dEvent.getDamager() instanceof Projectile) {
+			Projectile projectile = (Projectile) dEvent.getDamager();
+			LivingEntity shooter = projectile.getShooter();
+			if(!(shooter instanceof Player)) return;
+
+			attacker = (Player) shooter;
+		} else {
+			attacker = (Player) dEvent.getDamager();
+		}
+
 		Player victim = (Player) dEvent.getEntity();
 
 		if(!canPVP(attacker.getName()) || !canPVP(victim.getName())) {

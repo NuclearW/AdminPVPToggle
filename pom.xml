@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.nuclearw.adminpvptoggle</groupId>
     <artifactId>AdminPVPToggle</artifactId>
-    <version>0.1b</version>
+    <version>0.2</version>
     <name>AdminPVPToggle</name>
     <url>https://github.com/NuclearW/AdminPVPToggle</url>
     <issueManagement>
