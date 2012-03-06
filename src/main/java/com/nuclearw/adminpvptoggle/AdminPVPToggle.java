@@ -102,7 +102,7 @@ public class AdminPVPToggle extends JavaPlugin implements Listener {
 			if(args.length > 1) time = System.currentTimeMillis();
 
 			int count = args.length;
-			
+
 			while(count > 1) {
 				try {
 					int timeMultiplier = Integer.valueOf(args[count-2]);
