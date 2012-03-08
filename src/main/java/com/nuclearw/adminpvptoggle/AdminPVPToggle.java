@@ -7,11 +7,15 @@ import java.util.List;
 import java.util.Random;
 import javax.persistence.PersistenceException;
 
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.AnimalTamer;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.entity.Tameable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -167,23 +171,37 @@ public class AdminPVPToggle extends JavaPlugin implements Listener {
 	public void onEntityDamage(EntityDamageEvent event) {
 		if(!(event instanceof EntityDamageByEntityEvent)) return;
 		EntityDamageByEntityEvent dEvent = (EntityDamageByEntityEvent) event;
-		if(!(dEvent.getDamager() instanceof Player || dEvent.getDamager() instanceof Projectile)) return;
+		if(!(dEvent.getDamager() instanceof Player || dEvent.getDamager() instanceof Projectile || dEvent.getDamager() instanceof Tameable)) return;
 		if(!(dEvent.getEntity() instanceof Player)) return;
 
-		Player attacker;
-		if(dEvent.getDamager() instanceof Projectile) {
+		String attackerName = "";
+		if(dEvent.getDamager() instanceof Player) {
+			Player attacker = (Player) dEvent.getDamager();
+			attackerName = attacker.getName();
+		} else if(dEvent.getDamager() instanceof Projectile) {
 			Projectile projectile = (Projectile) dEvent.getDamager();
 			LivingEntity shooter = projectile.getShooter();
 			if(!(shooter instanceof Player)) return;
 
-			attacker = (Player) shooter;
-		} else {
-			attacker = (Player) dEvent.getDamager();
+			Player attacker = (Player) shooter;
+			attackerName = attacker.getName();
+		} else if(dEvent.getDamager() instanceof Tameable) {
+			Tameable tameable = (Tameable) dEvent.getDamager();
+			if(!tameable.isTamed()) return;
+
+			AnimalTamer tamer = tameable.getOwner();
+			if(tamer instanceof HumanEntity) {
+				HumanEntity attacker = (HumanEntity) tamer;
+				attackerName = attacker.getName();
+			} else {
+				OfflinePlayer attacker = (OfflinePlayer) tamer;
+				attackerName = attacker.getName();
+			}
 		}
 
 		Player victim = (Player) dEvent.getEntity();
 
-		if(!canPVP(attacker.getName()) || !canPVP(victim.getName())) {
+		if(!canPVP(attackerName) || !canPVP(victim.getName())) {
 			event.setCancelled(true);
 			return;
 		}
