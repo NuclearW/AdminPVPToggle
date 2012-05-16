@@ -51,6 +51,7 @@ public class AdminPVPToggle extends JavaPlugin implements Listener {
 			if(sender instanceof Player) {
 				if(!sender.hasPermission("adminpvptoggle.enablepvp")) {
 					sender.sendMessage("You do not have permission to perform this command.");
+					return true;
 				}
 			}
 
@@ -77,6 +78,7 @@ public class AdminPVPToggle extends JavaPlugin implements Listener {
 			if(sender instanceof Player) {
 				if(!sender.hasPermission("adminpvptoggle.disablepvp")) {
 					sender.sendMessage("You do not have permission to perform this command.");
+					return true;
 				}
 			}
 
@@ -128,6 +130,7 @@ public class AdminPVPToggle extends JavaPlugin implements Listener {
 			if(time == 0) {
 				if(!sender.hasPermission("adminpvptoggle.disablepvp.permanent")) {
 					sender.sendMessage("You do not have permission to perform this command.");
+					return true;
 				}
 			}
 
