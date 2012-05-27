@@ -8,7 +8,7 @@
 		<file>
 			<source>${project.build.directory}/${artifactId}.jar</source>
 			<outputDirectory>/</outputDirectory>
-			<destName>AdminPVPToggle.jar</destName>
+			<destName>${artifactId}.jar</destName>
 		</file>
 	</files>
 </assembly>

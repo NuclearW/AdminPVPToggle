@@ -1,4 +1,4 @@
-name: AdminPVPToggle
+name: ${project.name}
 main: com.nuclearw.adminpvptoggle.AdminPVPToggle
 version: ${project.version}
 author: NuclearW
